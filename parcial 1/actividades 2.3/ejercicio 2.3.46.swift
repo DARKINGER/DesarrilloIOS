@@ -1,97 +1,61 @@
-import Foundation
-class Automovil{
-    private var _NumeroDeSerieMotor : String
-    private var _Marca : String
-    private var _Año : Date
-    private var _Precio : Double
-
-    var NumeroDeSerieMotor : String {return _NumeroDeSerieMotor}
-    var Marca : String {return _Marca}
-    var Año : Date {return _Año}
-    var Precio : Double {return _Precio}
-
-    init( NumeroMotor : String, marca: String, Año: Date, precio: Double){
-        _NumeroDeSerieMotor = NumeroMotor
-        _Marca = marca
-        _Año = Año
-        _Precio = precio
+class Auto {
+    let numeroSerieMotor: String
+    let marca: String
+    let anio: Int
+    let precio: Double
+    
+    init(numeroSerieMotor: String, marca: String, anio: Int, precio: Double) {
+        self.numeroSerieMotor = numeroSerieMotor
+        self.marca = marca
+        self.anio = anio
+        self.precio = precio
     }
 }
 
-class AutoCompacto:Automovil{
-
-    private var _CantidadDePasajeros : Int
-    var Pasajeros : Int {return _CantidadDePasajeros}
-
-    init( _ NumeroMotor : String, Marca: String, Año: Date, precio: Double, pasajero : Int){
-        _CantidadDePasajeros = pasajero
-        super.init(NumeroMotor:NumeroMotor, marca:Marca, Año:Año, precio: precio)
+class Compacto: Auto {
+    let cantidadPasajeros: Int
+    
+    init(numeroSerieMotor: String, marca: String, anio: Int, precio: Double, cantidadPasajeros: Int) {
+        self.cantidadPasajeros = cantidadPasajeros
+        super.init(numeroSerieMotor: numeroSerieMotor, marca: marca, anio: anio, precio: precio)
     }
 }
 
-class AutoDeLujo:Automovil{
-
-    private var _CantidadDePasajeros : Int
-    var Pasajeros : Int {return _CantidadDePasajeros}
-
-    init( _ NumeroMotor : String, Marca: String, Año: Date, precio: Double, pasajero : Int){
-        _CantidadDePasajeros = pasajero
-        super.init(NumeroMotor:NumeroMotor, marca:Marca, Año:Año, precio: precio)
+class DeLujo: Auto {
+    let cantidadPasajeros: Int
+    
+    init(numeroSerieMotor: String, marca: String, anio: Int, precio: Double, cantidadPasajeros: Int) {
+        self.cantidadPasajeros = cantidadPasajeros
+        super.init(numeroSerieMotor: numeroSerieMotor, marca: marca, anio: anio, precio: precio)
     }
-
-}
-class Vagoneta:Automovil{
-
-    private var _CantidadDePasajeros : Int
-    var Pasajeros : Int {return _CantidadDePasajeros}
-
-    init( _ NumeroMotor : String, Marca: String, Año: Date, precio: Double, pasajero : Int){
-        _CantidadDePasajeros = pasajero
-        super.init(NumeroMotor:NumeroMotor, marca:Marca, Año:Año, precio: precio)
-    }
-
-}
-class Camioneta:Automovil{
-
-    private var _CapacidadCarga : Double
-    var Carga : Double {return _CapacidadCarga}
-    private var _CantidadEjes : Int
-    var Ejes : Int {return _CantidadEjes}
-    private var _CantidadRodada : Int
-    var Rodada : Int {return _CantidadRodada}
-
-    func Carga(Kg : Double){
-        if Kg > 0.0
-        {
-            _CapacidadCarga = Kg
-        }
-    }
-    func Ejes(ejes: Int){
-        if ejes >= 4 {
-            _CantidadEjes = ejes
-        }
-    }
-    func Rodada(rodada: Int){
-        if rodada > 0
-        {
-            _CantidadRodada = rodada
-        }
-    }
-
-    init( _ NumeroMotor : String, Marca: String, Año: Date, precio: Double, 
-     carga : Double, ejes : Int, rodada : Int){
-        _CapacidadCarga = carga
-        _CantidadEjes = ejes
-        _CantidadRodada = rodada
-        super.init(NumeroMotor:NumeroMotor, marca:Marca, Año:Año, precio: precio)
-    }
-
 }
 
-var miata = AutoCompacto("19100168",Marca: "Mazda", Año: Date(), precio: 250000.99, pasajero: 2)
+class Camioneta: Auto {
+    let capacidadCarga: Double
+    let cantidadEjes: Int
+    let cantidadRodadas: Int
+    
+    init(numeroSerieMotor: String, marca: String, anio: Int, precio: Double, capacidadCarga: Double, cantidadEjes: Int, cantidadRodadas: Int) {
+        self.capacidadCarga = capacidadCarga
+        self.cantidadEjes = cantidadEjes
+        self.cantidadRodadas = cantidadRodadas
+        super.init(numeroSerieMotor: numeroSerieMotor, marca: marca, anio: anio, precio: precio)
+    }
+}
 
-print(miata)
-print(miata.Marca)
-print(miata.Año)
+class Vagoneta: Auto {
+    let cantidadPasajeros: Int
+    
+    init(numeroSerieMotor: String, marca: String, anio: Int, precio: Double, cantidadPasajeros: Int) {
+        self.cantidadPasajeros = cantidadPasajeros
+        super.init(numeroSerieMotor: numeroSerieMotor, marca: marca, anio: anio, precio: precio)
+    }
+}
 
-
+//instanciando cada tipo de vehículo
+let miCompacto = Compacto(numeroSerieMotor: "ABC123", marca: "Toyota", anio: 2021, precio: 20000, cantidadPasajeros: 5)
+let miDeLujo = DeLujo(numeroSerieMotor: "DEF456", marca: "BMW", anio: 2022, precio: 50000, cantidadPasajeros: 4)
+let miCamioneta = Camioneta(numeroSerieMotor: "GHI789", marca: "Ford", anio: 2020, precio: 40000, capacidadCarga: 1500, cantidadEjes: 2, cantidadRodadas: 4)
+print(miCompacto, miCompacto.marca)
+print(miCamioneta, miCamioneta.marca)
+print(miDeLujo, miDeLujo.marca)
